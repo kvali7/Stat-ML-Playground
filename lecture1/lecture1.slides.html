@@ -15600,13 +15600,14 @@ z
 <div class="text_cell_render border-box-sizing rendered_html">
 <h3 id="Risk-and-Empirical-Risk">Risk and Empirical Risk<a class="anchor-link" href="#Risk-and-Empirical-Risk">&#182;</a></h3><p>Given a loss $\ell(\theta; X,Y)$, for parameters $\theta$, the <em>risk</em> is 
 $$
-R(\theta) = \mathbb E \ell(\theta; X,Y).
+R(\theta) = \mathbb E [\ell(\theta; X,Y)].
 $$</p>
 <p>And given training data $\{x_i,y_i\}_{i=1}^{n_0}$ (drawn iid to $X,Y$), then the <em>empirical risk</em> is
 $$
 R_n(\theta) = \frac 1n \sum_{i=1}^n \ell(\theta; x_i, y_i).
 $$
-Notice that $\mathbb E R_n(\theta) = R(\theta)$ for fixed $\theta$.</p>
+for fixed $\theta$ we have: 
+$$\mathbb E[ R_n(\theta)] = R(\theta)$$</p>
 <p>For a class of parameters $\Theta$, the <em>empirical risk minimizer (ERM)</em> is the 
 $$
 \hat \theta = \arg \min_{\theta \in \Theta} R_n(\theta)
@@ -15634,7 +15635,7 @@ This is the ERM for square error loss and linear predictor.</p>
 <div class="text_cell_render border-box-sizing rendered_html">
 <h3 id="Why-is-ERM-a-good-idea?">Why is ERM a good idea?<a class="anchor-link" href="#Why-is-ERM-a-good-idea?">&#182;</a></h3><p>For a fixed $\theta$ we know by the Law of Large Numbers (as long as expectations exist and data is iid),
 $$
-R_n(\theta) = \frac 1n \sum_{i=1}^n \ell(\theta; x_i, y_i) \rightarrow \mathbb E \ell(\theta; X,Y) = R(\theta),
+R_n(\theta) = \frac 1n \sum_{i=1}^n \ell(\theta; x_i, y_i) \rightarrow \mathbb E [\ell(\theta; X,Y)] = R(\theta),
 $$
 where convergence is in probability (or almost surely).
 We want to minimize $R(\theta)$ so $R_n(\theta)$ is a pretty good surrogate.</p>
@@ -15659,7 +15660,7 @@ $$
 $$
 The risk is
 $$
-R(\theta) = \mathbb E \mathbf 1 \{g_\theta(X)\ne Y\} = \mathbb P \{ g_\theta(X) \ne Y \}.
+R(\theta) = \mathbb E[ \mathbf 1 \{g_\theta(X)\ne Y\}] = \mathbb P \{ g_\theta(X) \ne Y \}.
 $$
 How well will he do?</p>
 
@@ -15701,7 +15702,7 @@ R_n(\hat \theta) = \min_{\theta \in \Theta} R_n(\theta)
 $$
 which does NOT converge to $R(\theta)$ because
 $$
-\mathbb E R_n(\hat \theta) = \mathbb E \min_\theta R_n(\theta) \ne \min_{\theta} \mathbb E R_n(\theta) = \min_\theta R(\theta).
+\mathbb E [R_n(\hat \theta)] = \mathbb E [\min_\theta R_n(\theta)] \ne \min_{\theta} \mathbb E [R_n(\theta)] = \min_\theta R(\theta).
 $$</p>
 <h3 id="Solution">Solution<a class="anchor-link" href="#Solution">&#182;</a></h3><p>Split the data randomly into training and test sets:</p>
 <ul>
